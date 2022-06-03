@@ -22,7 +22,6 @@ public class CsvReadRepository {
         for (Person person:cardsList
         ) {
             listOfNames.add(person.getName());
-            System.out.println(person.getId());
         }
         return listOfNames;
     }
