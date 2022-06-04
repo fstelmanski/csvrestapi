@@ -62,6 +62,7 @@ public class CSVToPersonList {
         Person person = new Person(id, name, surname, phone);
         validatePerson(person);
         checkIfPersonExist(person);
+        checkIfNumberExist(person);
         cardsList.add(person);
     }
     public ArrayList<Person>getAllPeople() {
@@ -75,5 +76,13 @@ public class CSVToPersonList {
     private void checkIfPersonExist(Person person) {
         if (cardsList.contains(person))
             throw new RuntimeException("Person Already Exists");
+    }
+    private void checkIfNumberExist(Person person) {
+        for (Person p:cardsList
+             ) {
+            if(p.getPhone() == person.getPhone()){
+                throw new RuntimeException("Number Already Exists!");
+            }
+        }
     }
 }

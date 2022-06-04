@@ -22,13 +22,13 @@ public class CsvReadRepositoryTest {
     @Test
     public void shouldGetAllCards(){
         ArrayList<Person> list = readRepository.getCardsList();
-        Assertions.assertTrue(list.size()>4);
+        Assertions.assertTrue(list.size()>6);
     }
 
     @Test
     public void shouldNotGetAllCards(){
         ArrayList<Person> list = readRepository.getCardsList();
-        Assertions.assertFalse(list.size()>5);
+        Assertions.assertFalse(list.size()>7);
     }
     @Test
     public void shouldNotGetAllCardsBecauseThereIsNoAtAll(){
@@ -38,68 +38,68 @@ public class CsvReadRepositoryTest {
 
 
     @Test
-    public void shouldGetCardsByNameEvenIfItIsOne(){
-        ArrayList<String>list = readRepository.getCardsListByName();
+    public void shouldGetNamesEvenIfItIsOne(){
+        ArrayList<String>list = readRepository.getNamesFromCardList();
         Assertions.assertTrue(list.size()>0);
     }
     @Test
-    public void shouldGetAllCardsByName(){
-        ArrayList<String> list = readRepository.getCardsListByName();
-        Assertions.assertTrue(list.size()>4);
+    public void shouldGetNames(){
+        ArrayList<String> list = readRepository.getNamesFromCardList();
+        Assertions.assertTrue(list.size()>6);
     }
 
     @Test
-    public void shouldNotGetAllCardsByName(){
-        ArrayList<String> list = readRepository.getCardsListByName();
-        Assertions.assertFalse(list.size()>5);
+    public void shouldNotGetNamesBecauseThereIsMoreThanExist(){
+        ArrayList<String> list = readRepository.getNamesFromCardList();
+        Assertions.assertFalse(list.size()>7);
     }
     @Test
-    public void shouldNotGetAllCardsByNameBecauseThereIsNoAtAll(){
-        ArrayList<String> list = readRepository.getCardsListByName();
+    public void shouldNotGetNamesBecauseThereIsNotAny(){
+        ArrayList<String> list = readRepository.getNamesFromCardList();
         Assertions.assertNotEquals(0,list);
     }
 
     @Test
-    public void shouldGetCardsBySurnameEvenIfItIsOne(){
-        ArrayList<String>list = readRepository.getCardsListBySurname();
+    public void shouldGetSurnamesEvenIfItIsOne(){
+        ArrayList<String>list = readRepository.getSurnamesFromCardList();
         Assertions.assertTrue(list.size()>0);
     }
     @Test
-    public void shouldGetAllCardsBySurname(){
-        ArrayList<String> list = readRepository.getCardsListBySurname();
-        Assertions.assertTrue(list.size()>4);
+    public void shouldGetSurnames(){
+        ArrayList<String> list = readRepository.getSurnamesFromCardList();
+        Assertions.assertTrue(list.size()>6);
     }
 
     @Test
-    public void shouldNotGetAllCardsBySurname(){
-        ArrayList<String> list = readRepository.getCardsListBySurname();
-        Assertions.assertFalse(list.size()>5);
+    public void shouldNotGetSurnamesBecauseThereIsMoreThanExist(){
+        ArrayList<String> list = readRepository.getSurnamesFromCardList();
+        Assertions.assertFalse(list.size()>7);
     }
     @Test
-    public void shouldNotGetAllCardsBySurnameBecauseThereIsNoAtAll(){
-        ArrayList<String> list = readRepository.getCardsListBySurname();
+    public void shouldNotGetSurnamesBecauseThereIsNotAny(){
+        ArrayList<String> list = readRepository.getSurnamesFromCardList();
         Assertions.assertNotEquals(0,list);
     }
 
     @Test
-    public void shouldGetCardsByPhoneEvenIfItIsOne(){
-        ArrayList<Long>list = readRepository.getCardsListByPhone();
+    public void shouldGetPhoneNumbersEvenIfItIsOne(){
+        ArrayList<Long>list = readRepository.getPhoneNumbersFromCardList();
         Assertions.assertTrue(list.size()>0);
     }
     @Test
-    public void shouldGetAllCardsByPhone(){
-        ArrayList<Long> list = readRepository.getCardsListByPhone();
-        Assertions.assertTrue(list.size()>4);
+    public void shouldGetAllPhoneNumbers(){
+        ArrayList<Long> list = readRepository.getPhoneNumbersFromCardList();
+        Assertions.assertTrue(list.size()>6);
     }
 
     @Test
-    public void shouldNotGetAllCardsByPhone(){
-        ArrayList<Long> list = readRepository.getCardsListByPhone();
-        Assertions.assertFalse(list.size()>5);
+    public void shouldNotGetAllPhoneNumbersBecauseThereIsMoreThanExist(){
+        ArrayList<Long> list = readRepository.getPhoneNumbersFromCardList();
+        Assertions.assertFalse(list.size()>7);
     }
     @Test
-    public void shouldNotGetAllCardsByPhoneBecauseThereIsNoAtAll(){
-        ArrayList<Long> list = readRepository.getCardsListByPhone();
+    public void shouldNotGetPhoneNumbersBecauseThereIsNotAny(){
+        ArrayList<Long> list = readRepository.getPhoneNumbersFromCardList();
         Assertions.assertNotEquals(0,list);
     }
 
@@ -113,4 +113,59 @@ public class CsvReadRepositoryTest {
         Person p = readRepository.getById(3);
         Assertions.assertNotEquals("Gordon",p.getName());
     }
+
+    @Test
+    public void shouldGetCardsByNameIfThereIsMoreThanOne(){
+        ArrayList<Person>list = readRepository.getCardsHavingName("Lonnie");
+        Assertions.assertEquals(2,list.size());
+    }
+    @Test
+    public void shouldGetCardsByNameIfThereIsOnlyOne(){
+        ArrayList<Person>list = readRepository.getCardsHavingName("Filip");
+        Assertions.assertEquals(1,list.size());
+    }
+    @Test
+    public void shouldNotGetCardsByName(){
+        ArrayList<Person>list = readRepository.getCardsHavingName("Filipp");
+        Assertions.assertNotEquals(1,list.size());
+    }
+    @Test
+    public void shouldNotGetCardsByNameFullList(){
+        ArrayList<Person>list = readRepository.getCardsHavingName("Lonnie");
+        Assertions.assertNotEquals(1,list.size());
+    }
+
+
+    @Test
+    public void shouldGetCardsBySurnameIfThereIsMoreThanOne(){
+        ArrayList<Person>list = readRepository.getCardsHavingSurname("James");
+        Assertions.assertEquals(2,list.size());
+    }
+    @Test
+    public void shouldGetCardsBySurnameIfThereIsOnlyOne(){
+        ArrayList<Person>list = readRepository.getCardsHavingSurname("Stelmański");
+        Assertions.assertEquals(1,list.size());
+    }
+    @Test
+    public void shouldNotGetCardsBySurname(){
+        ArrayList<Person>list = readRepository.getCardsHavingSurname("Jamess");
+        Assertions.assertNotEquals(1,list.size());
+    }
+    @Test
+    public void shouldNotGetCardsBySurnameFullList(){
+        ArrayList<Person>list = readRepository.getCardsHavingSurname("James");
+        Assertions.assertNotEquals(1,list.size());
+    }
+
+    @Test
+    public void shouldGetCardByPhone(){
+        Person p = readRepository.getCardHavingPhoneNumber(48667058713L);
+        Assertions.assertEquals(48667058713L,p.getPhone());
+    }
+    @Test
+    public void shouldNotGetCardByPhone(){
+        Person p = readRepository.getCardHavingPhoneNumber(48667058713L);
+        Assertions.assertNotEquals(48667059713L,p.getPhone());
+    }
+
 }

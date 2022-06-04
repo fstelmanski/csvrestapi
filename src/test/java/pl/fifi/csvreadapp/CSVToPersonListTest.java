@@ -64,6 +64,12 @@ class CSVToPersonListTest {
         Assertions.assertThrows(RuntimeException.class,()->{csvToPersonList.addPerson(6,"Andrew","Andree",123456789111L);
         });
     }
+    @Test
+    @DisplayName("Should not create person when phone already exist")
+    public void shouldThrowRuntimeExceptionWhenPhoneAlreadyExists() {
+        Assertions.assertThrows(RuntimeException.class,()->{csvToPersonList.addPerson(6,"Andrew","Andree",48667058713L);
+        });
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "src/cards.csv", numLinesToSkip = 1)

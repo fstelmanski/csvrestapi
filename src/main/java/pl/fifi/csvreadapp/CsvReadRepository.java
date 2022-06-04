@@ -17,7 +17,7 @@ public class CsvReadRepository {
         return cardsList;
     }
 
-    public ArrayList<String>getCardsListByName(){
+    public ArrayList<String>getNamesFromCardList(){
         ArrayList<String>listOfNames = new ArrayList<>();
         for (Person person:cardsList
         ) {
@@ -26,7 +26,7 @@ public class CsvReadRepository {
         return listOfNames;
     }
 
-    public ArrayList<String>getCardsListBySurname(){
+    public ArrayList<String>getSurnamesFromCardList(){
         ArrayList<String>listOfSurnames = new ArrayList<>();
         for (Person person:cardsList
         ) {
@@ -35,7 +35,7 @@ public class CsvReadRepository {
         return listOfSurnames;
     }
 
-    public ArrayList<Long>getCardsListByPhone(){
+    public ArrayList<Long>getPhoneNumbersFromCardList(){
         ArrayList<Long>listOfPhoneNumbers = new ArrayList<>();
         for (Person person:cardsList
         ) {
@@ -48,6 +48,31 @@ public class CsvReadRepository {
         Optional<Person> foundFirst = cardsList.stream().filter(person -> person.getId() == id).findFirst();
         return foundFirst.get();
     }
+    public ArrayList<Person>getCardsHavingName(String name){
+        ArrayList<Person>listOfPersonByNames = new ArrayList<>();
+        for (Person person:cardsList
+        ) {
+            if(person.getName().equals(name)) {
+                listOfPersonByNames.add(person);
+            }
+        }
+        return listOfPersonByNames;
+    }
+    public ArrayList<Person>getCardsHavingSurname(String surname){
+        ArrayList<Person>listOfPersonBySurnames = new ArrayList<>();
+        for (Person person:cardsList
+        ) {
+            if(person.getSurname().equals(surname)) {
+                listOfPersonBySurnames.add(person);
+            }
+        }
+        return listOfPersonBySurnames;
+    }
+    public Person getCardHavingPhoneNumber(Long phone){
+        Optional<Person> foundFirst = cardsList.stream().filter(person -> person.getPhone() == phone).findFirst();
+        return foundFirst.get();
+    }
+
 
 }
 
